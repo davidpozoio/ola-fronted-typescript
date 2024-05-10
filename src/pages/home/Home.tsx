@@ -2,22 +2,34 @@ import { Menu } from "primereact/menu";
 import "./styles/home-styles.css";
 import { MenuItem } from "primereact/menuitem";
 import ROUTES from "../../consts/routes";
-import { Outlet } from "react-router-dom";
-import { Menubar } from "primereact/menubar";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   let items: MenuItem[] = [
     {
       label: "Notificationes",
       icon: "pi pi-plus",
-      url: ROUTES.HOME.NOTIFICATIONS,
+      command: () => {
+        navigate(ROUTES.HOME.NOTIFICATIONS);
+      },
     },
-    { label: "Usuarios", icon: "pi pi-search", url: ROUTES.HOME.USERS },
+    {
+      label: "Usuarios",
+      icon: "pi pi-search",
+      command: () => {
+        navigate(ROUTES.HOME.USERS);
+      },
+    },
   ];
 
   return (
     <div className="global-home-grid">
-      <Menubar className="menubar" />
+      <div
+        className="menubar"
+        style={{ borderBottom: "1px solid white" }}
+      ></div>
       <Menu
         className="nav"
         onChange={() => {

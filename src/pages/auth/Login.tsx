@@ -4,15 +4,18 @@ import { Button } from "primereact/button";
 import { FormEventHandler } from "react";
 import { Password } from "primereact/password";
 import ROUTES from "../../consts/routes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { login } from "../../services/auth-service";
 import { LoginDto } from "../../models/auth";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const { mutate: mutateLogin } = useMutation(login, {
     onSuccess: async (req) => {
       console.log(req.data);
+      navigate(ROUTES.HOME.ME);
     },
   });
 
